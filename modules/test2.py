@@ -1,0 +1,2 @@
+def rah():
+    print('rah')
