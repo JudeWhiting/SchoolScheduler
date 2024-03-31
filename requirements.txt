@@ -1,0 +1,3 @@
+run this to get all dependencies: 
+
+pip freeze > requirements.txt
