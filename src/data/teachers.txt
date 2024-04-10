@@ -1,10 +1,150 @@
-J. Smith , math
-M. Johnson , math
-S. Brown , eng
-K. Jones , eng
-L. Davis , sci
-R. Miller , sci
-N. Wilson , mus
-E. Moore , ict
-T. Taylor , his
-B. Anderson , geo
+spesh , math
+spesh , math
+spesh , math
+spesh , math
+spesh , math
+spesh , math
+spesh , math
+spesh , math
+spesh , eng
+spesh , eng
+spesh , eng
+spesh , eng
+spesh , eng
+spesh , eng
+spesh , eng
+spesh , eng
+spesh , phy
+spesh , phy
+spesh , phy
+spesh , phy
+spesh , phy
+spesh , phy
+spesh , bio
+spesh , bio
+spesh , bio
+spesh , bio
+spesh , bio
+spesh , bio
+spesh , chem
+spesh , chem
+spesh , chem
+spesh , chem
+spesh , chem
+spesh , chem
+spesh , mus
+spesh , mus
+spesh , ict
+spesh , ict
+spesh , his
+spesh , his
+spesh , his
+spesh , his
+spesh , geo
+spesh , geo
+spesh , geo
+spesh , geo
+spesh , art
+spesh , art
+spesh , per
+spesh , per
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 
+generic , 

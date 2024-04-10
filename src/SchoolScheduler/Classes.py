@@ -1,5 +1,33 @@
 import pandas as pd
 import numpy as np
+import random
+
+Days = ['mon','tues','wed','thur','fri']
+Groups = {'7N':[],'7S':[],
+          '8N':[],'8S':[],
+          '9N':[],'9S':[],
+          '10N':[],'10S':[],
+          '11N':[],'11S':[]
+          }
+
+Subjects = []
+Teachers = []
+Rooms = []
+Students = []
+Meetings = []
+
+class Subject:
+
+    subject_count = 0
+
+    def __init__(self, name, hours):
+
+        self.ID = Subject.subject_count
+        self.name = name
+        self.hours = hours
+
+        Subject.subject_count += 1
+
 
 class Teacher:
 
@@ -29,11 +57,11 @@ class Student:
 
     student_count = 0
 
-    def __init__(self, name, year):
+    def __init__(self, name, group):
 
         self.ID = Student.student_count
         self.name = name
-        self.year = year
+        self.group = group
 
         Student.student_count += 1
 
@@ -41,45 +69,21 @@ class Student:
 
 class Meeting:
 
-    def __init__(self, ID, students, teacher, subject, room):
-        pass
+    meeting_count = 0
+
+    def __init__(self, subject, rooms, teachers):
+
+        self.ID = Meeting.meeting_count
+        self.subject = subject
+        self.rooms = rooms
+        self.teachers = teachers
+
+        Meeting.meeting_count += 1
+        
+def create_meetings(subjects, rooms, teachers):
+    pass
 
 
-Subjects = []
-Teachers = []
-Rooms = []
-Students = []
-
-with open ('src/data/teachers.txt', 'r') as file:
-    for line in file:
-        line = line.strip()
-        parts = line.split(' , ')
-        Teachers.append(Teacher(parts[0], parts[1:]))
-
-with open ('src/data/students.txt', 'r') as file:
-    for line in file:
-        line = line.strip()
-        parts = line.split(', ')
-        Students.append(Student(parts[0], parts[1]))
-
-with open ('src/data/rooms.txt') as file:
-    for line in file:
-        line = line.strip()
-        parts = line.split(' , ')
-        Rooms.append(Room())
-
-data = {
-    ('main', 'student'): Students
-}
-
-df = pd.DataFrame(data)
-for day in ['mon','tues','wed','thur','fri']:
-
-        for i in range(1,6):
-
-            df[(day, f'p{i}')] = np.zeros(len(Students))
-
-print(df)
 
 # Teachers = []
 # Teachers.append(Teacher(len(Teachers), 'A. Johnson', ['eng', 'ict']))

@@ -1,2 +1,5 @@
-import numpy as np
-print(np.zeros(4)[1] == 0)
+import pandas as pd
+
+data = pd.DataFrame()
+data.loc['a','b'] = [4,5]
+print(data)

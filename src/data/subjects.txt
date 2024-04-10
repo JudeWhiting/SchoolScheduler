@@ -1,0 +1,11 @@
+math , 4
+eng , 4
+phy , 3
+bio , 3
+chem , 3
+mus , 1
+ict , 1
+his , 2
+geo , 2
+art , 1
+per , 1
