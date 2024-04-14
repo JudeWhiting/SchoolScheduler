@@ -1,7 +1,22 @@
 from Base import *
+from Read_Files import *
 
 
-# 
+def create_table():
+    data = {
+        ('main', 'group'): Groups
+    }
+
+    df = pd.DataFrame(data)
+
+    for day in Days:
+        for i in range(1,6):
+
+            df[(day, f'p{i}')] = np.zeros(len(Groups))
+
+    return df
+    
+    
 
 
 
@@ -42,7 +57,12 @@ def sub_track(subs):
     return subject_tracker
 
 for row in rows:
-    subject_tracker = sub_track(Subjects)
+
+    subject_tracker = {}    # generate a count of how many subjects are left each loop
+
+    for sub in Subjects:
+        subject_tracker[sub.name] = int(sub.hours)
+
     for column in columns:
         while 1:
             random_meeting = random.choice(Meetings)
@@ -52,7 +72,7 @@ for row in rows:
 
         df.at[row, column] = random_meeting
 
-
+df = create_table()
 print(df)
 print(subject_tracker)
 

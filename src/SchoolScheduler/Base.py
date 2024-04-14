@@ -81,47 +81,12 @@ class Meeting:
         Meeting.meeting_count += 1
 
 
-def generate_elements():
-    with open ('src/data/teachers.txt', 'r') as file:
-        for line in file:
-            line = line.strip()
-            parts = line.split(' , ')
-            Teachers.append(Teacher(parts[0], parts[1:]))
 
-    with open ('src/data/students.txt', 'r') as file:
-        for line in file:
-            line = line.strip()
-            parts = line.split(' , ')
-            student = Student(parts[0], parts[1])
-            Groups[student.group].append(student)
-            Students.append(student)
-            
-    with open ('src/data/rooms.txt') as file:
-        for line in file:
-            line = line.strip()
-            parts = line.split(' , ')
-            Rooms.append(Room(parts[0], parts[1]))
 
-    with open ('src/data/subjects.txt', 'r') as file:
-        for line in file:
-            line = line.strip()
-            parts = line.split(' , ')
-            subject = Subject(parts[0], parts[1])
-            Subjects.append(subject)
 
 
 # create table
-data = {
 
-    ('main', 'group'): Groups
-}
-
-df = pd.DataFrame(data)
-for day in Days:
-
-        for i in range(1,6):
-
-            df[(day, f'p{i}')] = np.zeros(len(Groups))
 
 
 
