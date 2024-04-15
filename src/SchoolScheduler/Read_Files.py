@@ -4,7 +4,7 @@ with open ('src/data/teachers.txt', 'r') as file:
     for line in file:
         line = line.strip()
         parts = line.split(' , ')
-        Teachers.append(Teacher(parts[0], parts[1:]))
+        Teachers.append(Teacher(parts[0], parts[1], parts[2:]))
 
 with open ('src/data/students.txt', 'r') as file:
     for line in file:
@@ -18,7 +18,7 @@ with open ('src/data/rooms.txt') as file:
     for line in file:
         line = line.strip()
         parts = line.split(' , ')
-        Rooms.append(Room(parts[0], parts[1]))
+        Classrooms.append(Room(parts[0], parts[1]))
 
 with open ('src/data/subjects.txt', 'r') as file:
     for line in file:

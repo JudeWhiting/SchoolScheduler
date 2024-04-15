@@ -12,9 +12,10 @@ Groups = {'7N':[],'7S':[],
 
 Subjects = []
 Teachers = []
-Rooms = []
+Classrooms = []
 Students = []
 Meetings = []
+classes_per_group = 4
 
 class Subject:
 
@@ -24,7 +25,7 @@ class Subject:
 
         self.ID = Subject.subject_count
         self.name = name
-        self.hours = hours
+        self.hours = int(hours)
 
         Subject.subject_count += 1
 
@@ -33,10 +34,11 @@ class Teacher:
 
     teacher_count = 0
 
-    def __init__(self, name, subjects=[]):
+    def __init__(self, name, classroom, subjects=[]):
 
         self.ID = Teacher.teacher_count
         self.name = name
+        self.classroom = classroom
         self.subjects = subjects
 
         Teacher.teacher_count += 1

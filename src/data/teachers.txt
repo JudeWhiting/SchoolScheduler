@@ -1,150 +1,158 @@
-spesh , math
-spesh , math
-spesh , math
-spesh , math
-spesh , math
-spesh , math
-spesh , math
-spesh , math
-spesh , eng
-spesh , eng
-spesh , eng
-spesh , eng
-spesh , eng
-spesh , eng
-spesh , eng
-spesh , eng
-spesh , phy
-spesh , phy
-spesh , phy
-spesh , phy
-spesh , phy
-spesh , phy
-spesh , bio
-spesh , bio
-spesh , bio
-spesh , bio
-spesh , bio
-spesh , bio
-spesh , chem
-spesh , chem
-spesh , chem
-spesh , chem
-spesh , chem
-spesh , chem
-spesh , mus
-spesh , mus
-spesh , ict
-spesh , ict
-spesh , his
-spesh , his
-spesh , his
-spesh , his
-spesh , geo
-spesh , geo
-spesh , geo
-spesh , geo
-spesh , art
-spesh , art
-spesh , per
-spesh , per
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
-generic , 
+spesh1 , math1 , math
+spesh2 , math2 , math
+spesh3 , math3 , math
+spesh4 , math4 , math
+spesh5 , math5 , math
+spesh6 , math6 , math
+spesh7 , math7 , math
+spesh8 , math8 , math
+spesh9 , eng1 , eng
+spesh10 , eng2 , eng
+spesh11 , eng3 , eng
+spesh12 , eng4 , eng
+spesh13 , eng5 , eng
+spesh14 , eng6 , eng
+spesh15 , eng7 , eng
+spesh16 , eng8 , eng
+spesh17 , phy1 , phy
+spesh18 , phy2 , phy
+spesh19 , phy3 , phy
+spesh20 , phy4 , phy
+spesh21 , phy5 , phy
+spesh22 , phy6 , phy
+spesh23 , bio1 , bio
+spesh24 , bio2 , bio
+spesh25 , bio3 , bio
+spesh26 , bio4 , bio
+spesh27 , bio5 , bio
+spesh28 , bio6 , bio
+spesh29 , chem1 , chem
+spesh30 , chem2 , chem
+spesh31 , chem3 , chem
+spesh32 , chem4 , chem
+spesh33 , chem5 , chem
+spesh34 , chem6 , chem
+spesh35 , mus1 , mus
+spesh36 , mus1 , mus
+spesh37 , mus2 , mus
+spesh38 , mus2 , mus
+spesh39 , ict1 , ict
+spesh40 , ict1 , ict
+spesh41 , ict2 , ict
+spesh42 , ict2 , ict
+spesh43 , his1 , his
+spesh44 , his2 , his
+spesh45 , his3 , his
+spesh46 , his4 , his
+spesh47 , geo1 , geo
+spesh48 , geo2 , geo
+spesh49 , geo3 , geo
+spesh50 , geo4 , geo
+spesh51 , art1 , art
+spesh52 , art1 , art
+spesh53 , art2 , art
+spesh54 , art2 , art
+spesh55 , per1 , per
+spesh56 , per1 , per
+spesh57 , per2 , per
+spesh58 , per2 , per
+generic1 , none , 
+generic2 , none , 
+generic3 , none , 
+generic4 , none , 
+generic5 , none , 
+generic6 , none , 
+generic7 , none , 
+generic8 , none , 
+generic9 , none , 
+generic10 , none , 
+generic11 , none , 
+generic12 , none , 
+generic13 , none , 
+generic14 , none , 
+generic15 , none , 
+generic16 , none , 
+generic17 , none , 
+generic18 , none , 
+generic19 , none , 
+generic20 , none , 
+generic21 , none , 
+generic22 , none , 
+generic23 , none , 
+generic24 , none , 
+generic25 , none , 
+generic26 , none , 
+generic27 , none , 
+generic28 , none , 
+generic29 , none , 
+generic30 , none , 
+generic31 , none , 
+generic32 , none , 
+generic33 , none , 
+generic34 , none , 
+generic35 , none , 
+generic36 , none , 
+generic37 , none , 
+generic38 , none , 
+generic39 , none , 
+generic40 , none , 
+generic41 , none , 
+generic42 , none , 
+generic43 , none , 
+generic44 , none , 
+generic45 , none , 
+generic46 , none , 
+generic47 , none , 
+generic48 , none , 
+generic49 , none , 
+generic50 , none , 
+generic51 , none , 
+generic52 , none , 
+generic53 , none , 
+generic54 , none , 
+generic55 , none , 
+generic56 , none , 
+generic57 , none , 
+generic58 , none , 
+generic59 , none , 
+generic60 , none , 
+generic61 , none , 
+generic62 , none , 
+generic63 , none , 
+generic64 , none , 
+generic65 , none , 
+generic66 , none , 
+generic67 , none , 
+generic68 , none , 
+generic69 , none , 
+generic70 , none , 
+generic71 , none , 
+generic72 , none , 
+generic73 , none , 
+generic74 , none , 
+generic75 , none , 
+generic76 , none , 
+generic77 , none , 
+generic78 , none , 
+generic79 , none , 
+generic80 , none , 
+generic81 , none , 
+generic82 , none , 
+generic83 , none , 
+generic84 , none , 
+generic85 , none , 
+generic86 , none , 
+generic87 , none , 
+generic88 , none , 
+generic89 , none , 
+generic90 , none , 
+generic91 , none , 
+generic92 , none , 
+generic93 , none , 
+generic94 , none , 
+generic95 , none , 
+generic96 , none , 
+generic97 , none , 
+generic98 , none , 
+generic99 , none , 
+generic100 , none , 
