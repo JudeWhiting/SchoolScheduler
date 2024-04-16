@@ -57,31 +57,6 @@ def createmeetings():
     return Meetings
 
 
-def assign_feasible_meetings():   
-
-    rows = df.index.tolist()
-    columns = df.columns.tolist()
-    columns.pop(0)
-
-    for row in rows:
-
-        subject_tracker = {}    # generate a count of how many subjects are left each loop
-
-        for sub in Subjects:
-            subject_tracker[sub.name] = sub.hours
-
-        for column in columns:
-            while 1:
-                random_meeting = random.choice(Meetings)
-                if subject_tracker[random_meeting.subject] != 0:
-                    subject_tracker[random_meeting.subject] -= 1
-                    break
-
-            df.at[row, column] = random_meeting
-
-    return df
-
-
 
 def assign_meetings():    # needs to return an array of meetings
 
@@ -102,7 +77,7 @@ def assign_meetings():    # needs to return an array of meetings
 
             z = 0
 
-            while z < 1000:
+            while z < 100:
                 z+=1
                 isbreak = False
                 random_subject = random.choices(Subjects, weights=strack.loc[row].tolist())[0]
@@ -121,10 +96,73 @@ def assign_meetings():    # needs to return an array of meetings
             
             
 
-    return df
+    return df, strack
+
+
+def fill_unfilled_meetings():
+    rows = df.index.tolist()
+    cols = df.columns.tolist()
+    #cols.pop(0)
+    for row in rows:
+
+
+
+        unfilled_periods = np.where(df.loc[row].values == 0)[0]
+        # for i in range(len(unfilled_periods)):
+            
+        #     unfilled_periods[i] +=1
+
+        for col_index in unfilled_periods:
+
+            missing_subjects_list = []
+            isbreak = False
+            
+            # makes a list of the missing subjects
+            for i, val in enumerate(missing_subjects.loc[row]):
+                for j in range(val):
+                    missing_subjects_list.append(missing_subjects.columns[i])
+                
+
+
+            for col in cols:
+                
+                if col == ('main', 'group'):
+                    continue
+
+                for sub in missing_subjects_list:
+
+                    for meeting in Meetings[sub]:
+
+                        if meeting not in df[col].tolist():
+                            if df.loc[row, col] not in df.iloc[:, col_index].tolist():
+
+                                df.iloc[df.index.get_loc(row), col_index] = df.loc[row,col]
+                                df.loc[row, col] = meeting
+                                missing_subjects.loc[row, sub] -= 1
+
+                                isbreak = True
+
+
+                        if isbreak == True:
+                            break
+
+                    if isbreak == True:
+                        break
+
+                if isbreak == True:
+                    break
 
     
-    
+
+    return df
+                                
+
+
+
+
+
+
+
 
 
 
@@ -133,36 +171,32 @@ def assign_meetings():    # needs to return an array of meetings
 Meetings = createmeetings()
 print(Meetings)
 df = create_table()
-df = assign_meetings()
+df, missing_subjects = assign_meetings()
 
+print(df)
+print(missing_subjects)
+df = fill_unfilled_meetings() # need to test
 print(df)
 
 
 
 
-for i in df[('mon','p5')]:
-    print(i.subject)
 
+# prints a whole column
+for i in df[('fri','p5')]:
+    if i == 0:
+        print(0)
+        continue
+    print(i.subject)
 print()
 
 # prints a whole row
-x = df.iloc[0].tolist()
+x = df.iloc[9].tolist()
 x.pop(0)
 for i in x:
+    if i == 0:
+        print(0)
+        continue
     print(i.subject)
-#randomly assigns the correct amount of lessons to each student
-# hard requirement 1 done YAY
 
-# #df[('mon', 'p1')] = Meeting('eng', Rooms[:4], Teachers[:4], Groups['7N'])
-# df.at['7N',('mon','p1')] = 'xD'
-
-# print(df)
-
-# # Get all row labels (index)
-# row_labels = df.index.tolist()
-
-# # Get all column labels
-# column_labels = df.columns.tolist()
-# print(row_labels)
-# print(column_labels)
 
