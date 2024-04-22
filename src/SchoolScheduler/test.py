@@ -13,3 +13,8 @@ print(col)
 
 for i in range(0):
     print('hiiiii')
+
+df = pd.DataFrame(vals)
+ddf = pd.DataFrame()
+if df.equals(ddf):
+    print('woohoo')

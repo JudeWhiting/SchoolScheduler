@@ -1,6 +1,7 @@
 from Base import *
 from Read_Files import *
-df = pd.DataFrame()
+
+
 
 def create_table():
     data = {
@@ -17,29 +18,6 @@ def create_table():
     return df
     
 
-
-def create_meetings():
-
-    chosen_teachers = {}
-    chosen_rooms = {}
-    Meetings = []
-
-    for sub in Subjects:
-
-        teachers_with_matching_subject = [teacher for teacher in Teachers if sub.name in teacher.subjects]
-        classrooms_with_matching_subject = [classroom for classroom in Classrooms if classroom.block == sub.name]
-        chosen_teachers[sub.name] = []
-        chosen_rooms[sub.name] = []
-
-        for i in range(4):
-
-            chosen_teachers[sub.name].append(random.choice(teachers_with_matching_subject))
-            chosen_rooms[sub.name].append(random.choice(classrooms_with_matching_subject))
-
-    for sub in Subjects:
-        Meetings.append(Meeting(sub.name, chosen_rooms[sub.name], chosen_teachers[sub.name]))
-
-    return Meetings
 
 def createmeetings():
 
@@ -99,7 +77,10 @@ def assign_meetings():    # needs to return an array of meetings
     return df, strack
 
 
+
 def fill_unfilled_meetings():
+    missing_subjects_copy = missing_subjects.copy()
+    #print(missing_subjects_copy)
     rows = df.index.tolist()
     cols = df.columns.tolist()
     #cols.pop(0)
@@ -152,11 +133,29 @@ def fill_unfilled_meetings():
                 if isbreak == True:
                     break
 
-    
+    return df, missing_subjects, not missing_subjects.equals(missing_subjects_copy)
 
-    return df
-                                
 
+
+
+
+def readable_timetable():
+    readable_df = pd.DataFrame()
+    readable_df.index = df.index.tolist()
+    cols = df.columns.tolist()
+    cols.pop(0)
+
+    for x, col_name in enumerate(cols):
+        ls = []
+        for i in df[col_name]:
+            if i == 0:
+                ls.append(0)
+                continue
+            ls.append(i.subject)
+        
+        readable_df[x+1] = ls
+
+    return readable_df
 
 
 
@@ -169,34 +168,21 @@ def fill_unfilled_meetings():
 
 
 Meetings = createmeetings()
-print(Meetings)
 df = create_table()
 df, missing_subjects = assign_meetings()
 
-print(df)
-print(missing_subjects)
-df = fill_unfilled_meetings() # need to test
-print(df)
+run_again = True
+while run_again: # i think i need this loop just in case but potentially can be removed
+    df, missing_subjects, run_again  = fill_unfilled_meetings()
 
 
+# print(df)
+#print(missing_subjects)
+#print(readable_timetable())
+
+'''
+
+- check hard constraints of other TT algorithms to make sure i have all of them
 
 
-
-# prints a whole column
-for i in df[('fri','p5')]:
-    if i == 0:
-        print(0)
-        continue
-    print(i.subject)
-print()
-
-# prints a whole row
-x = df.iloc[9].tolist()
-x.pop(0)
-for i in x:
-    if i == 0:
-        print(0)
-        continue
-    print(i.subject)
-
-
+'''
