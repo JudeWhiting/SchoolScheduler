@@ -16,6 +16,8 @@ Classrooms = []
 Students = []
 Meetings = []
 classes_per_group = 4
+core_subjects = ['eng','math','phy','bio','chem']
+epochs = 10
 
 class Subject:
 

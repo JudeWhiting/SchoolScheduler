@@ -34,7 +34,12 @@ def createmeetings():
 
     return Meetings
 
-
+def subject_tracker():
+    strack = pd.DataFrame()
+    strack.index = df.index.tolist()
+    for sub in Subjects:
+        strack[sub.name] = sub.hours
+    return strack
 
 def assign_meetings():    # needs to return an array of meetings
 
@@ -44,10 +49,7 @@ def assign_meetings():    # needs to return an array of meetings
 
 
     # creates the amount of hours per subject per week needed
-    strack = pd.DataFrame()
-    strack.index = df.index.tolist()
-    for sub in Subjects:
-        strack[sub.name] = sub.hours
+    strack = subject_tracker()
 
     for column in columns:
 
@@ -135,23 +137,131 @@ def fill_unfilled_meetings():
 
     return df, missing_subjects, not missing_subjects.equals(missing_subjects_copy)
 
+def objective_function(timetable, return_df=False):
+
+    hc_breached = 9999
+    skip = False
+
+    strack = subject_tracker()
+    subject_timetable = readable_timetable(timetable, True)
+    rows = timetable.index.tolist()
+    cols = timetable.columns.tolist()
+    cols.pop(0)
+
+    cost = pd.DataFrame(index=rows,columns=['mon','tues','wed','thur','fri'])
+    cost = cost.fillna(0)
+    
+
+    for i, column in enumerate(cols):
+
+        for row in rows:
+
+            meeting = timetable.loc[row, column]
+
+            if meeting != 0:
+                subject = meeting.subject[:-1]
+                strack.loc[row, subject] -= 1
+            else:
+                cost += hc_breached
+                continue
+
+            if timetable[column].tolist().count(meeting) > 1: # checks no meetings are scheduled at the same time
+                cost += hc_breached
+
+            if (i+1) % 5 == 0: # if it's period 5
+                if subject in core_subjects:
+                    cost.loc[row, column[0]] += 1
+
+            if skip == False:
+                group_subjects = subject_timetable.loc[row].tolist()
+                group_subjects = split_list(group_subjects, 5)
+                for j, day in enumerate(group_subjects):
+                    cost.loc[row, cols[j*5][0]] += len(day) - len(set(day))
+
+        skip = True
+
+    if not strack.eq(0).all().all(): # checks all groups have the right number of meetings per week
+        cost += hc_breached
+
+    if return_df == True:
+        return cost
+    else:
+        
+        return cost.sum().sum()
 
 
 
+def generate_neighboring_solution(timetable, cost):
 
-def readable_timetable():
+    subject_timetable = readable_timetable(timetable)
+    rows = timetable.index.tolist()
+    columns = timetable.columns.tolist()
+    columns.pop(0)
+
+    for row in rows:
+
+        group_meetings= subject_timetable.loc[row].tolist()
+        group_meetings = split_list(group_meetings, 5)
+
+        weights = cost.loc[row].tolist()
+        days = Days
+        random_day = random.choices(days, weights)[0]
+        day_index = days.index(random_day)
+        weights.pop(day_index)
+        days.remove(random_day)
+
+        random_day2 = random.choices(days, weights)[0]
+        
+        
+        
+
+    
+
+    return
+
+
+
+def local_search(initial_solution, num_iterations):
+    current_solution = initial_solution
+    best_solution = initial_solution
+
+    for i in range(num_iterations):
+        # Generate a neighboring solution
+        new_solution = generate_neighboring_solution(current_solution)
+
+        # Evaluate the objective function value of the neighboring solution
+        current_value = objective_function(current_solution)
+        new_value = objective_function(new_solution)
+
+        # If the neighboring solution is better, accept it
+        if new_value < current_value:
+            current_solution = new_solution
+            best_solution = new_solution
+
+    return best_solution
+
+
+
+def split_list(lst, chunk_size):
+    return [lst[i:i+chunk_size] for i in range(0, len(lst), chunk_size)]
+
+
+
+def readable_timetable(table, subject_only=False):
     readable_df = pd.DataFrame()
-    readable_df.index = df.index.tolist()
-    cols = df.columns.tolist()
+    readable_df.index = table.index.tolist()
+    cols = table.columns.tolist()
     cols.pop(0)
 
     for x, col_name in enumerate(cols):
         ls = []
-        for i in df[col_name]:
+        for i in table[col_name]:
             if i == 0:
                 ls.append(0)
-                continue
-            ls.append(i.subject)
+            elif subject_only == True:
+                ls.append(i.subject[:-1])
+            else:
+                ls.append(i.subject)
         
         readable_df[x+1] = ls
 
@@ -166,19 +276,46 @@ def readable_timetable():
 
 
 
-
+best_solution_cost = 99999999
 Meetings = createmeetings()
-df = create_table()
-df, missing_subjects = assign_meetings()
 
-run_again = True
-while run_again: # i think i need this loop just in case but potentially can be removed
-    df, missing_subjects, run_again  = fill_unfilled_meetings()
+
+for i in range(1):
+    df = create_table()
+    df, missing_subjects = assign_meetings()
+
+    run_again = True
+    while run_again: # i think i need this loop just in case but potentially can be removed
+        df, missing_subjects, run_again  = fill_unfilled_meetings()
+        
+    current_cost = objective_function(df)
+    if current_cost < best_solution_cost:
+        best_solution_cost = current_cost
+        best_solution = df
+
+    
+df = best_solution
+
+print(readable_timetable(df))
+print(best_solution_cost)
+cost_table = objective_function(df, True)
+print(cost_table)
+
+df = generate_neighboring_solution(df, cost_table)
+print(df)
+cost_table = objective_function(df, True)
+print(cost_table)
+
+
+
+
 
 
 # print(df)
+#df.loc['7N', ('mon','p1')] = 0
 #print(missing_subjects)
-#print(readable_timetable())
+# print(readable_timetable(True))
+# print(objective_function(df))
 
 '''
 

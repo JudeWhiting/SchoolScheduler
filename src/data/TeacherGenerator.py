@@ -9,7 +9,7 @@ with open('src/data/teachers.txt', 'w') as file:
             count += 1
             file.write(f'spesh{count} , {Subjects[i]}{j+1} , {Subjects[i]}\n')
 
-            if hours == 1:
+            if hours % 2 == 1:
                 count += 1
                 file.write(f'spesh{count} , {Subjects[i]}{j+1} , {Subjects[i]}\n')
 
