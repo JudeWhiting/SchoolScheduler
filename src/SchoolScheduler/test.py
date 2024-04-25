@@ -57,8 +57,19 @@ print(pee.hi)
 print(any(element in z for element in [7,8,9,10,11,4]))
 
 def fart():
-    return 5, 4
+    df.iloc[1,1] = 100
 
-print(fart())
-x = fart()[1]
-print(x)
+
+fart()
+print(df)
+
+for x in range(100):
+    print(x)
+    x = x%5
+    print(x)
+
+print(max([1,2,3,4,5,5]))
+print([1,2,3,5,4,5].index(5))
+
+df.iloc[:, 1] = df.iloc[:, 0]
+print(df)

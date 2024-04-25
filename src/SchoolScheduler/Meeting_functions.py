@@ -207,7 +207,7 @@ def generate_neighboring_solution(timetable, cost):
         weights = cost.loc[row].tolist()
 
         if sum(weights) == 0:
-            weights = [x + 1 for x in weights]
+            continue
 
         days = list(Days)
         random_day = random.choices(days, weights)[0]
@@ -215,8 +215,8 @@ def generate_neighboring_solution(timetable, cost):
         weights.pop(day_index)
         days.remove(random_day)
 
-        if sum(weights) == 0:
-            continue
+
+        weights = [x + 0.1 for x in weights]
 
         random_day2 = random.choices(days, weights)[0]
         
@@ -251,9 +251,11 @@ def generate_neighboring_solution(timetable, cost):
 
 def local_search(initial_solution, num_iterations):
     best_solution = initial_solution
-    best_solution_copy = best_solution.copy()
+    # best_solution_copy = best_solution.copy()
 
     for i in range(num_iterations):
+
+        best_solution_copy = best_solution.copy()
 
         best_value, value_table = objective_function(best_solution)
 
@@ -261,8 +263,11 @@ def local_search(initial_solution, num_iterations):
 
         new_value = objective_function(new_solution)[0]
 
-        if new_value < best_value:
+        print(f'best value: {best_value}')
+        print(f'new value: {new_value}')
 
+        if new_value <= best_value:
+            print('accepted')
             best_solution = new_solution.copy()
 
     return best_solution
@@ -293,6 +298,34 @@ def readable_timetable(table, subject_only=False):
     return readable_df
 
 
+def p5_swap(timetable):
+    rows = timetable.index.tolist()
+    cols = timetable.columns.tolist()
+    cols.pop(0)
+
+    weights = [0,0,0,0,0]
+
+    for i, col in enumerate(cols):
+
+        for j, row in enumerate(rows):
+
+            if timetable.loc[row, col].subject[:-1] in core_subjects:
+                weights[i%5] += 1
+        
+        if i%5 == 4:
+            print(weights)
+            if weights.index(min(weights)) != 4:
+
+                min_index = weights.index(min(weights))
+                col_5 = timetable[col]
+                timetable[col] = timetable.iloc[:, min_index + i+1 - 4]
+                timetable.iloc[:, min_index + i+1 - 4] = col_5
+            
+            weights = [0,0,0,0,0]
+
+    return timetable
+
+            
 
 
 
@@ -305,7 +338,7 @@ best_solution_cost = 99999999
 Meetings = createmeetings()
 
 
-for i in range(3):
+for i in range(100):
     df = create_table()
     df, missing_subjects = assign_meetings()
 
@@ -332,12 +365,18 @@ cost = objective_function(df)[0]
 
 
 
-df = local_search(df, 10)
+df = local_search(df, 2500)
 print(readable_timetable(df))
-print(objective_function(df)[0])
-print(f'old values: {cost}')
 
+old_cost = objective_function(df)[0]
 
+df = p5_swap(df)
+
+print(readable_timetable(df))
+new_cost = objective_function(df)[0]
+print(f'start cost: {best_solution_cost}')
+print(f'cost after local search: {old_cost}')
+print(f'cost after swapping periods: {new_cost}')
 
 
 # print(df)
