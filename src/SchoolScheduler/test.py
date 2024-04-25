@@ -40,3 +40,25 @@ for i, j in enumerate(z):
 print((1,2,3)[1])
 print('a')
 print(df.sum().sum())
+
+
+class teste:
+    def __init__(self,hi):
+        self.hi = hi
+
+
+poop = teste(1)
+print(poop.hi)
+pee = poop
+pee.hi = 4
+print(poop.hi)
+print(pee.hi)
+
+print(any(element in z for element in [7,8,9,10,11,4]))
+
+def fart():
+    return 5, 4
+
+print(fart())
+x = fart()[1]
+print(x)

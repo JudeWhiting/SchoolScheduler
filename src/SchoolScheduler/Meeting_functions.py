@@ -137,7 +137,7 @@ def fill_unfilled_meetings():
 
     return df, missing_subjects, not missing_subjects.equals(missing_subjects_copy)
 
-def objective_function(timetable, return_df=False):
+def objective_function(timetable):
 
     hc_breached = 9999
     skip = False
@@ -183,64 +183,89 @@ def objective_function(timetable, return_df=False):
     if not strack.eq(0).all().all(): # checks all groups have the right number of meetings per week
         cost += hc_breached
 
-    if return_df == True:
-        return cost
-    else:
+    # if return_df == True:
+    #     return cost
+    # else:
         
-        return cost.sum().sum()
+    #     return cost.sum().sum()
+
+    return cost.sum().sum(), cost
 
 
 
 def generate_neighboring_solution(timetable, cost):
 
-    subject_timetable = readable_timetable(timetable)
     rows = timetable.index.tolist()
     columns = timetable.columns.tolist()
     columns.pop(0)
 
     for row in rows:
 
-        group_meetings= subject_timetable.loc[row].tolist()
+        group_meetings = timetable.loc[row, timetable.columns[1:]].tolist()
         group_meetings = split_list(group_meetings, 5)
 
         weights = cost.loc[row].tolist()
-        days = Days
+
+        if sum(weights) == 0:
+            weights = [x + 1 for x in weights]
+
+        days = list(Days)
         random_day = random.choices(days, weights)[0]
         day_index = days.index(random_day)
         weights.pop(day_index)
         days.remove(random_day)
 
+        if sum(weights) == 0:
+            continue
+
         random_day2 = random.choices(days, weights)[0]
         
+        # now choose a random meeting from each day to swap
+        random_day_meetings = group_meetings[Days.index(random_day)]
+        random_day_meetings2 = group_meetings[Days.index(random_day2)]
         
-        
+        random_period = random.randint(0, len(random_day_meetings) -1)
+        random_period2 = random.randint(0, len(random_day_meetings2) -1)
 
-    
+        # if random_day_meetings2[random_period2] not in timetable[(random_day, f'p{random_period + 1}')].tolist():
 
-    return
+        #     if random_day_meetings[random_period] not in timetable[(random_day2, f'p{random_period2 + 1}')].tolist():
+
+        #         placeholder = random_day_meetings[random_period]
+        #         timetable.loc[row, (random_day, f'p{random_period + 1}')] = random_day_meetings2[random_period2]
+        #         timetable.loc[row, (random_day2, f'p{random_period2 + 1}')] = placeholder
+
+
+        for meeting2 in Meetings[random_day_meetings2[random_period2].subject[:-1]]:
+            if meeting2 not in timetable[(random_day, f'p{random_period + 1}')].tolist():
+                for meeting in Meetings[random_day_meetings[random_period].subject[:-1]]:
+                    if meeting not in timetable[(random_day2, f'p{random_period2 + 1}')].tolist():
+
+                        timetable.loc[row, (random_day, f'p{random_period + 1}')] = meeting2
+                        timetable.loc[row, (random_day2, f'p{random_period2 + 1}')] = meeting
+
+    return timetable
+
 
 
 
 def local_search(initial_solution, num_iterations):
-    current_solution = initial_solution
     best_solution = initial_solution
+    best_solution_copy = best_solution.copy()
 
     for i in range(num_iterations):
-        # Generate a neighboring solution
-        new_solution = generate_neighboring_solution(current_solution)
 
-        # Evaluate the objective function value of the neighboring solution
-        current_value = objective_function(current_solution)
-        new_value = objective_function(new_solution)
+        best_value, value_table = objective_function(best_solution)
 
-        # If the neighboring solution is better, accept it
-        if new_value < current_value:
-            current_solution = new_solution
-            best_solution = new_solution
+        new_solution = generate_neighboring_solution(best_solution_copy, value_table)
+
+        new_value = objective_function(new_solution)[0]
+
+        if new_value < best_value:
+
+            best_solution = new_solution.copy()
 
     return best_solution
-
-
 
 def split_list(lst, chunk_size):
     return [lst[i:i+chunk_size] for i in range(0, len(lst), chunk_size)]
@@ -280,7 +305,7 @@ best_solution_cost = 99999999
 Meetings = createmeetings()
 
 
-for i in range(1):
+for i in range(3):
     df = create_table()
     df, missing_subjects = assign_meetings()
 
@@ -288,7 +313,7 @@ for i in range(1):
     while run_again: # i think i need this loop just in case but potentially can be removed
         df, missing_subjects, run_again  = fill_unfilled_meetings()
         
-    current_cost = objective_function(df)
+    current_cost = objective_function(df)[0]
     if current_cost < best_solution_cost:
         best_solution_cost = current_cost
         best_solution = df
@@ -296,17 +321,21 @@ for i in range(1):
     
 df = best_solution
 
+
+# cost_table = objective_function(df)[1]
+cost = objective_function(df)[0]
+
+
+# df = generate_neighboring_solution(df, cost_table)
+# cost2 = objective_function(df)[0]
+# cost_table = objective_function(df)[1]
+
+
+
+df = local_search(df, 10)
 print(readable_timetable(df))
-print(best_solution_cost)
-cost_table = objective_function(df, True)
-print(cost_table)
-
-df = generate_neighboring_solution(df, cost_table)
-print(df)
-cost_table = objective_function(df, True)
-print(cost_table)
-
-
+print(objective_function(df)[0])
+print(f'old values: {cost}')
 
 
 
