@@ -7,5 +7,5 @@ mus , 1
 ict , 1
 his , 2
 geo , 2
-art , 1
-per , 1
+art , 2
+per , 0

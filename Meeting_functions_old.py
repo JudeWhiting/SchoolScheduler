@@ -34,14 +34,14 @@ def createmeetings():
 
     return Meetings
 
-def subject_tracker(df):
+def subject_tracker():
     strack = pd.DataFrame()
     strack.index = df.index.tolist()
     for sub in Subjects:
         strack[sub.name] = sub.hours
     return strack
 
-def assign_meetings(df):    # needs to return an array of meetings
+def assign_meetings():    # needs to return an array of meetings
 
     rows = df.index.tolist()
     columns = df.columns.tolist()
@@ -49,7 +49,7 @@ def assign_meetings(df):    # needs to return an array of meetings
 
 
     # creates the amount of hours per subject per week needed
-    strack = subject_tracker(df)
+    strack = subject_tracker()
 
     for column in columns:
 
@@ -61,9 +61,7 @@ def assign_meetings(df):    # needs to return an array of meetings
                 z+=1
                 isbreak = False
                 random_subject = random.choices(Subjects, weights=strack.loc[row].tolist())[0]
-                print(Meetings)
-                print(random_subject.name)
-                print(Meetings[random_subject.name])
+
                 random.shuffle(Meetings[random_subject.name])
 
                 for meeting in Meetings[random_subject.name]:
@@ -82,7 +80,7 @@ def assign_meetings(df):    # needs to return an array of meetings
 
 
 
-def fill_unfilled_meetings(df, missing_subjects):
+def fill_unfilled_meetings():
     missing_subjects_copy = missing_subjects.copy()
     #print(missing_subjects_copy)
     rows = df.index.tolist()
@@ -144,7 +142,7 @@ def objective_function(timetable):
     hc_breached = 9999
     skip = False
 
-    strack = subject_tracker(timetable)
+    strack = subject_tracker()
     subject_timetable = readable_timetable(timetable, True)
     rows = timetable.index.tolist()
     cols = timetable.columns.tolist()
@@ -330,74 +328,65 @@ def p5_swap(timetable):
             
 
 
-def individual_timetable(timetable, student):
-    i_timetable = pd.DataFrame()
-    i_timetable.index = ['p1','p2','p3','p4','p5']
-    meets = []
-    cols = timetable.columns.tolist()
-    cols.pop(0)
-
-    for i, col in enumerate(cols):
-        meet = timetable.loc[student.group, col]
-        sub = meet.subject[:-1]
-
-
-        if sub in student.sets:
-            sub2 = sub
-        else:
-            sub2 = 'tut'
-
-
-        meets.append(f'{sub}\n\n{meet.teachers[student.sets[sub2] - 1].name}\n\n{meet.teachers[student.sets[sub2] - 1].classroom}')
-
-        if len(meets) == 5:
-            i_timetable[col[0]] = meets
-            meets = []
-
-    return i_timetable
 
 
 
 
 
 
-
-
-
-
+best_solution_cost = 99999999
 Meetings = createmeetings()
 
 
+for i in range(5):
+    df = create_table()
+    df, missing_subjects = assign_meetings()
 
-def process(epochs):
-    
-    best_solution_cost = 99999999
-
-    for i in range(epochs):
-
-        df = create_table()
-        df, missing_subjects = assign_meetings(df)
+    run_again = True
+    while run_again: # i think i need this loop just in case but potentially can be removed
+        df, missing_subjects, run_again  = fill_unfilled_meetings()
         
+    current_cost = objective_function(df)[0]
+    if current_cost < best_solution_cost:
+        best_solution_cost = current_cost
+        best_solution = df
 
-        # keeps looping until fill_unfilled_meetings() can't make any more changes
-        run_again = True
-        while run_again: 
-            df, missing_subjects, run_again  = fill_unfilled_meetings(df, missing_subjects)
-            
-        current_cost = objective_function(df)[0]
-
-        if current_cost < best_solution_cost:
-            best_solution_cost = current_cost
-            best_solution = df
-     
-    df = best_solution
+    
+df = best_solution
 
 
+# cost_table = objective_function(df)[1]
+cost = objective_function(df)[0]
 
-    df = local_search(df, epochs*5)
-    df = p5_swap(df)
 
-    print(readable_timetable(df))
-    print(f'end cost: {objective_function(df)[0]}')
+# df = generate_neighboring_solution(df, cost_table)
+# cost2 = objective_function(df)[0]
+# cost_table = objective_function(df)[1]
 
-    return df
+
+
+df = local_search(df, 10)
+print(readable_timetable(df))
+
+old_cost = objective_function(df)[0]
+
+df = p5_swap(df)
+print(df)
+print(readable_timetable(df))
+new_cost = objective_function(df)[0]
+print(f'start cost: {best_solution_cost}')
+print(f'cost after local search: {old_cost}')
+print(f'cost after swapping periods: {new_cost}')
+
+# print(df)
+#df.loc['7N', ('mon','p1')] = 0
+#print(missing_subjects)
+# print(readable_timetable(True))
+# print(objective_function(df))
+
+'''
+
+- check hard constraints of other TT algorithms to make sure i have all of them
+
+
+'''

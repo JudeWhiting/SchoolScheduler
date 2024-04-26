@@ -73,3 +73,34 @@ print([1,2,3,5,4,5].index(5))
 
 df.iloc[:, 1] = df.iloc[:, 0]
 print(df)
+
+import threading
+import time
+
+# Define a function that each thread will execute
+def task(name, delay):
+    print(f"Thread {name} started")
+    print(delay + 100)  # Simulate some task that takes time
+    print(f"Thread {name} finished")
+
+# Create multiple threads
+threads = []
+for i in range(3):
+    t = threading.Thread(target=task, args=(i, 2))  # Each thread will execute 'task' function with arguments
+    threads.append(t)
+    t.start()
+
+# Wait for all threads to complete
+for t in threads:
+    t.join()
+
+print("All threads have finished")
+
+df = pd.DataFrame({
+    'hi': [1,2,3],
+    'bye' : [4,5,6],
+    'wee' : [7,8,9],
+})
+
+df.loc[1,'hi'] = 3
+print(df)

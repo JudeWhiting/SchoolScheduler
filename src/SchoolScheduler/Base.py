@@ -4,21 +4,27 @@ import copy
 import random
 
 Days = ['mon','tues','wed','thur','fri']
-Groups = {'7N':[],'7S':[],
-          '8N':[],'8S':[],
-          '9N':[],'9S':[],
-          '10N':[],'10S':[],
-          '11N':[],'11S':[]
-          }
+# Groups = {'7N':[],'7S':[],
+#           '8N':[],'8S':[],
+#           '9N':[],'9S':[],
+#           '10N':[],'10S':[],
+#           '11N':[],'11S':[]
+#           }
 
 Subjects = []
 Teachers = []
 Classrooms = []
 Students = []
 Meetings = []
-classes_per_group = 4
 core_subjects = ['eng','math','phy','bio','chem']
-epochs = 10
+#epochs = 10
+
+while 1:
+    try:
+        classes_per_group = int(input('How many classes are there per group?\n>  '))
+        break
+    except:
+        input('Please enter a number!')
 
 class Subject:
 
@@ -62,11 +68,19 @@ class Student:
 
     student_count = 0
 
-    def __init__(self, name, group):
+    def __init__(self, name, group, sets):
 
         self.ID = Student.student_count
         self.name = name
         self.group = group
+        self.sets = {
+            'tut' : sets[0],
+            'eng' : sets[1],
+            'math' : sets[2],
+            'chem' : sets[3],
+            'phy' : sets[3],
+            'bio' : sets[3]
+        }
 
         Student.student_count += 1
 
@@ -76,11 +90,10 @@ class Meeting:
 
     meeting_count = 0
 
-    def __init__(self, subject, rooms, teachers):
+    def __init__(self, subject, teachers):
 
         self.ID = Meeting.meeting_count
         self.subject = subject
-        self.rooms = rooms
         self.teachers = teachers
 
         Meeting.meeting_count += 1
