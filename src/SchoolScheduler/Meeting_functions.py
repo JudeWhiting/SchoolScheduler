@@ -393,11 +393,14 @@ def process(epochs):
     df = best_solution
 
 
+    try:
+        df = local_search(df, epochs)
+        df = p5_swap(df)
 
-    df = local_search(df, epochs*5)
-    df = p5_swap(df)
-
-    print(readable_timetable(df))
-    print(f'end cost: {objective_function(df)[0]}')
+        print(readable_timetable(df))
+        print(f'end cost: {objective_function(df)[0]}')
+    except:
+        input('Feasible timetable failed to be created. Press ENTER to retry...')
+        df = process(epochs)
 
     return df
