@@ -13,7 +13,7 @@ def main():
         print('Exporting results. Please wait...')
 
         # iterate through each student
-        for student in meeting_functions.Students[:5]:
+        for student in meeting_functions.Students:
 
             # get the students' individual timetable
             student_timetable = meeting_functions.individual_timetable(solution, student)
@@ -22,8 +22,21 @@ def main():
 
             # format the excel sheet
             worksheet = writer.sheets[student.name]
-            # set row and column width
-            #worksheet.set_column('A:F', 15)
+            worksheet.set_default_row(60)
+
+
+    with pd.ExcelWriter('src/output/teacher_timetables.xlsx', engine='xlsxwriter') as writer:
+
+        # iterate through each teacher
+        for teacher in meeting_functions.Teachers:
+
+            # get the current teachers' individual timetable
+            t_timetable = meeting_functions.teacher_timetable(solution, teacher)
+            # write the timetable to an excel sheet
+            t_timetable.to_excel(writer, sheet_name=teacher.name)
+
+            # format the excel sheet
+            worksheet = writer.sheets[teacher.name]
             worksheet.set_default_row(60)
 
 

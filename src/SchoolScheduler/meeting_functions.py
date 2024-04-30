@@ -468,6 +468,52 @@ def individual_timetable(timetable, student):
 
 
 
+def teacher_timetable(timetable, teacher):
+
+    t_timetable = pd.DataFrame()
+    t_timetable.index = ['p1','p2','p3','p4','p5']
+    meets = []
+    rows = timetable.index.tolist()
+    cols = timetable.columns.tolist()
+    cols.pop(0)
+
+    # iterate through each column
+    for col in cols:
+
+        no_meeting = True
+
+        # iterate through each row
+        for row in rows:
+
+            # check if current cell is taught by the teacher
+            if teacher in timetable.loc[row, col].teachers:
+
+                # if yes, gets the subject, room, group and set and adds it to a list
+                meets.append(f'{teacher.subjects[0]}\n\n{teacher.classroom}\n\n{row}{timetable.loc[row, col].teachers.index(teacher) + 1}')
+                no_meeting = False
+                break
+        
+        # check if the teacher doesn't have a meeting this period
+        if no_meeting == True:
+
+            meets.append(f'\n\nempty\n\n')
+
+        # check if the current column is period 5
+        if len(meets) == 5:
+
+            # add the formatted meetings to the teachers' individual timetable
+            t_timetable[col[0]] = meets
+            meets = []
+
+
+    # return the teachers' individual timetable as a dataframe
+    return t_timetable
+
+        
+
+
+
+
 # this function creates the starting timetable, runs it through the local search and returns the school timetable
 def process():
     
