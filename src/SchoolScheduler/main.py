@@ -1,25 +1,36 @@
-import Meeting_functions
+import meeting_functions
 import pandas as pd
 
 
+
+
 def main():
-    solution = Meeting_functions.process(3)
-    #solution = Meeting_functions.readable_timetable(solution)
-    
-    #solution.to_excel('src/output/results.xlsx')
-    with pd.ExcelWriter('src/output/results.xlsx', engine='xlsxwriter') as writer:
-        # Write each DataFrame to a separate sheet
-        for student in Meeting_functions.Students[:5]:
-            student_timetable = Meeting_functions.individual_timetable(solution, student)
+
+    solution = meeting_functions.process()
+
+    with pd.ExcelWriter('src/output/student_timetables.xlsx', engine='xlsxwriter') as writer:
+
+        print('Exporting results. Please wait...')
+
+        # iterate through each student
+        for student in meeting_functions.Students[:5]:
+
+            # get the students' individual timetable
+            student_timetable = meeting_functions.individual_timetable(solution, student)
+            # write the timetable to an excel sheet
             student_timetable.to_excel(writer, sheet_name=student.name)
 
-            #workbook  = writer.book
+            # format the excel sheet
             worksheet = writer.sheets[student.name]
-            
-            # Set column width for columns A to F
-            #worksheet.set_column('A:F', 15)  # Adjust the width as needed
+            # set row and column width
+            #worksheet.set_column('A:F', 15)
             worksheet.set_default_row(60)
 
 
+
+
 if __name__ == '__main__':
+
     main()
+
+    print('Done!')

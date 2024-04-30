@@ -104,3 +104,4 @@ df = pd.DataFrame({
 
 df.loc[1,'hi'] = 3
 print(df)
+print(np.where([0,0,0,1] == 0)[0])
