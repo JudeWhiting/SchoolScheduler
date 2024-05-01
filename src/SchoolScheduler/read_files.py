@@ -1,9 +1,17 @@
 from base import *
-
+while 1:
+    try:
+        dataset = input(f'Which dataset would you like to use? 1 or 2\n>  ')
+        datasets = {'1' : '',
+                    '2' : '2'}
+        dataset = datasets[dataset]
+        break
+    except:
+        input('Please enter  a valid choice!')
 
 
 # creates a dictionary with keys corresponding to group names
-with open ('src/data/groups.txt', 'r') as file:
+with open (f'src/data/groups{dataset}.txt', 'r') as file:
  
     Groups = {}
 
@@ -21,7 +29,7 @@ with open ('src/data/groups.txt', 'r') as file:
 
 
 
-with open ('src/data/teachers.txt', 'r') as file:
+with open (f'src/data/teachers{dataset}.txt', 'r') as file:
 
     for line in file:
 
@@ -33,7 +41,7 @@ with open ('src/data/teachers.txt', 'r') as file:
 
 
 
-with open ('src/data/students.txt', 'r') as file:
+with open (f'src/data/students{dataset}.txt', 'r') as file:
 
     for line in file:
 
@@ -48,7 +56,7 @@ with open ('src/data/students.txt', 'r') as file:
 
 
 
-with open ('src/data/subjects.txt', 'r') as file:
+with open (f'src/data/subjects{dataset}.txt', 'r') as file:
 
     for line in file:
 

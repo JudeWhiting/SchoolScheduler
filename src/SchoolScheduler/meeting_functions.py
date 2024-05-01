@@ -523,10 +523,10 @@ def process():
 
     # create n timetables, select the best one (timetable with the least error)
     for i in range(epochs):
-
+        count = 0
         # runs until a feasible timetable is found
         while 1:
-
+            count += 1
             print('creating feasible timetable...')
             # create an empty school timetable
             df = create_table()
@@ -535,10 +535,11 @@ def process():
             # check if all cells are filled
             if not df.isin([0]).any().any():
                 break
+            elif count > 25:
+                raise ValueError('Feasible timetable unable to be created. Ensure you have enough teachers.')
         
         # checks the error of the newly created timetable
         current_cost = objective_function(df)[0]
-
         # checks if the new timetable is better than the previous timetable
         if current_cost < best_solution_cost:
 
@@ -547,14 +548,14 @@ def process():
             best_solution = df
      
     df = best_solution
-
     # run the local search n*n times
     df = local_search(df, epochs * epochs)
     # cost optimised swapping algorithm
     df = p5_swap(df)
-
     # print the final school timetable and its cost to the console
-    print(readable_timetable(df))
+    rt = readable_timetable(df)
+    print(rt.iloc[:,:13])
+    print(rt.iloc[:,13:])
     print(f'end cost: {objective_function(df)[0]}')
 
     return df

@@ -1,0 +1,10 @@
+maths , 4
+english , 4
+physics , 2
+biology , 2
+chemistry , 2
+music , 2
+ICT , 1
+history , 2
+geography , 2
+PE , 4

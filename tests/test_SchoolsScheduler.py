@@ -6,8 +6,8 @@ import read_files
 import meeting_functions
 import main
 
-def add(x, y):
-    return x + y
+
+
 
 class TestFunctions(unittest.TestCase):
 
@@ -33,7 +33,7 @@ class TestFunctions(unittest.TestCase):
 
         self.assertTrue(end_cost < start_cost)
 
-    def test_p5_swap(self):
+    def test_column_swap(self):
         while 1:
             df = meeting_functions.create_table()
             df = meeting_functions.feasible_timetable(df)
@@ -69,3 +69,4 @@ class TestFunctions(unittest.TestCase):
         
 if __name__ == '__main__':
     unittest.main()
+    input()

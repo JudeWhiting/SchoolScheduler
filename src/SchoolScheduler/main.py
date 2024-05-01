@@ -22,7 +22,7 @@ def main():
 
             # format the excel sheet
             worksheet = writer.sheets[student.name]
-            worksheet.set_default_row(60)
+            worksheet.set_default_row(70)
 
 
     with pd.ExcelWriter('src/output/teacher_timetables.xlsx', engine='xlsxwriter') as writer:
@@ -37,7 +37,7 @@ def main():
 
             # format the excel sheet
             worksheet = writer.sheets[teacher.name]
-            worksheet.set_default_row(60)
+            worksheet.set_default_row(70)
 
 
 

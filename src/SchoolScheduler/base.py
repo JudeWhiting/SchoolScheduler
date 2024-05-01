@@ -23,7 +23,7 @@ while 1:
 
     try:
 
-        classes_per_group = int(input('How many classes are there per group?\n>  '))
+        classes_per_group = int(input('How many sets are there per group?\n>  '))
         time_taken = input('Enter a number to select how long the algorithm takes (more slow = more optimised): 1 for fast, 2 for medium, 3 for slow, 4 for very slow\n>  ')
         epochs_dic = {'1': 10,
                       '2': 30,
