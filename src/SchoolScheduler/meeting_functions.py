@@ -509,12 +509,14 @@ def teacher_timetable(timetable, teacher):
     # return the teachers' individual timetable as a dataframe
     return t_timetable
 
-        
 
+# return a feasible timetable
+def feasible_timetable(df):
+    df, missing_subjects = assign_meetings(df)
+    df = fill_unfilled_meetings(df, missing_subjects)[0]
+    return df
 
-
-
-# this function creates the starting timetable, runs it through the local search and returns the school timetable
+# this function creates the starting timetable, runs it through the local search, runs it through the cost-optimised swapping algorithm and returns the school timetable
 def process():
     
     best_solution_cost = 99999999
@@ -522,17 +524,17 @@ def process():
     # create n timetables, select the best one (timetable with the least error)
     for i in range(epochs):
 
-        # create an empty school timetable
-        df = create_table()
-        # assign meetings to each cell
-        df, missing_subjects = assign_meetings(df)
-        
-        # fills any remaining cells which still need to be filled with a meeting
-        # keeps looping until fill_unfilled_meetings() can't make any more changes
-        run_again = True
-        while run_again:
+        # runs until a feasible timetable is found
+        while 1:
 
-            df, missing_subjects, run_again  = fill_unfilled_meetings(df, missing_subjects)
+            print('creating feasible timetable...')
+            # create an empty school timetable
+            df = create_table()
+            # fill the timetable
+            df = feasible_timetable(df)
+            # check if all cells are filled
+            if not df.isin([0]).any().any():
+                break
         
         # checks the error of the newly created timetable
         current_cost = objective_function(df)[0]
@@ -546,29 +548,16 @@ def process():
      
     df = best_solution
 
-    # the try will fail if a timetable was not successfully created
-    # this happens in very rare cases or if there are not enough teachers available to teach the number oclasses
-    try:
+    # run the local search n*n times
+    df = local_search(df, epochs * epochs)
+    # cost optimised swapping algorithm
+    df = p5_swap(df)
 
-        # run the local search n*n times
-        df = local_search(df, epochs * epochs)
-
-        df = p5_swap(df)
-
-        # print the final school timetable and its cost to the console
-        print(readable_timetable(df))
-        print(f'end cost: {objective_function(df)[0]}')
-
-    except:
-
-        # retry the function if a timetable was not successfully created
-        input('Feasible timetable failed to be created. Press ENTER to retry...')
-        df = process(epochs)
-
+    # print the final school timetable and its cost to the console
+    print(readable_timetable(df))
+    print(f'end cost: {objective_function(df)[0]}')
 
     return df
-
-
 
  # create all meetings and add them to a global list
 Meetings = create_meetings()

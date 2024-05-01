@@ -1,176 +1,65 @@
-spesh1 , math1 , math
-spesh2 , math2 , math
-spesh3 , math3 , math
-spesh4 , math4 , math
-spesh5 , math5 , math
-spesh6 , math6 , math
-spesh7 , math7 , math
-spesh8 , math8 , math
-spesh9 , eng1 , eng
-spesh10 , eng2 , eng
-spesh11 , eng3 , eng
-spesh12 , eng4 , eng
-spesh13 , eng5 , eng
-spesh14 , eng6 , eng
-spesh15 , eng7 , eng
-spesh16 , eng8 , eng
-spesh17 , phy1 , phy
-spesh18 , phy1 , phy
-spesh19 , phy2 , phy
-spesh20 , phy2 , phy
-spesh21 , phy3 , phy
-spesh22 , phy3 , phy
-spesh23 , phy4 , phy
-spesh24 , phy4 , phy
-spesh25 , phy5 , phy
-spesh26 , phy5 , phy
-spesh27 , phy6 , phy
-spesh28 , phy6 , phy
-spesh29 , bio1 , bio
-spesh30 , bio1 , bio
-spesh31 , bio2 , bio
-spesh32 , bio2 , bio
-spesh33 , bio3 , bio
-spesh34 , bio3 , bio
-spesh35 , bio4 , bio
-spesh36 , bio4 , bio
-spesh37 , bio5 , bio
-spesh38 , bio5 , bio
-spesh39 , bio6 , bio
-spesh40 , bio6 , bio
-spesh41 , chem1 , chem
-spesh42 , chem1 , chem
-spesh43 , chem2 , chem
-spesh44 , chem2 , chem
-spesh45 , chem3 , chem
-spesh46 , chem3 , chem
-spesh47 , chem4 , chem
-spesh48 , chem4 , chem
-spesh49 , chem5 , chem
-spesh50 , chem5 , chem
-spesh51 , chem6 , chem
-spesh52 , chem6 , chem
-spesh53 , mus1 , mus
-spesh54 , mus1 , mus
-spesh55 , mus2 , mus
-spesh56 , mus2 , mus
-spesh57 , ict1 , ict
-spesh58 , ict1 , ict
-spesh59 , ict2 , ict
-spesh60 , ict2 , ict
-spesh61 , his1 , his
-spesh62 , his2 , his
-spesh63 , his3 , his
-spesh64 , his4 , his
-spesh65 , geo1 , geo
-spesh66 , geo2 , geo
-spesh67 , geo3 , geo
-spesh68 , geo4 , geo
-spesh69 , art1 , art
-spesh70 , art1 , art
-spesh71 , art2 , art
-spesh72 , art2 , art
-spesh73 , per1 , per
-spesh74 , per1 , per
-spesh75 , per2 , per
-spesh76 , per2 , per
-generic1 , none , 
-generic2 , none , 
-generic3 , none , 
-generic4 , none , 
-generic5 , none , 
-generic6 , none , 
-generic7 , none , 
-generic8 , none , 
-generic9 , none , 
-generic10 , none , 
-generic11 , none , 
-generic12 , none , 
-generic13 , none , 
-generic14 , none , 
-generic15 , none , 
-generic16 , none , 
-generic17 , none , 
-generic18 , none , 
-generic19 , none , 
-generic20 , none , 
-generic21 , none , 
-generic22 , none , 
-generic23 , none , 
-generic24 , none , 
-generic25 , none , 
-generic26 , none , 
-generic27 , none , 
-generic28 , none , 
-generic29 , none , 
-generic30 , none , 
-generic31 , none , 
-generic32 , none , 
-generic33 , none , 
-generic34 , none , 
-generic35 , none , 
-generic36 , none , 
-generic37 , none , 
-generic38 , none , 
-generic39 , none , 
-generic40 , none , 
-generic41 , none , 
-generic42 , none , 
-generic43 , none , 
-generic44 , none , 
-generic45 , none , 
-generic46 , none , 
-generic47 , none , 
-generic48 , none , 
-generic49 , none , 
-generic50 , none , 
-generic51 , none , 
-generic52 , none , 
-generic53 , none , 
-generic54 , none , 
-generic55 , none , 
-generic56 , none , 
-generic57 , none , 
-generic58 , none , 
-generic59 , none , 
-generic60 , none , 
-generic61 , none , 
-generic62 , none , 
-generic63 , none , 
-generic64 , none , 
-generic65 , none , 
-generic66 , none , 
-generic67 , none , 
-generic68 , none , 
-generic69 , none , 
-generic70 , none , 
-generic71 , none , 
-generic72 , none , 
-generic73 , none , 
-generic74 , none , 
-generic75 , none , 
-generic76 , none , 
-generic77 , none , 
-generic78 , none , 
-generic79 , none , 
-generic80 , none , 
-generic81 , none , 
-generic82 , none , 
-generic83 , none , 
-generic84 , none , 
-generic85 , none , 
-generic86 , none , 
-generic87 , none , 
-generic88 , none , 
-generic89 , none , 
-generic90 , none , 
-generic91 , none , 
-generic92 , none , 
-generic93 , none , 
-generic94 , none , 
-generic95 , none , 
-generic96 , none , 
-generic97 , none , 
-generic98 , none , 
-generic99 , none , 
-generic100 , none , 
+T1 , Ma1 , maths
+T2 , Ma2 , maths
+T3 , Ma3 , maths
+T4 , Ma4 , maths
+T5 , Ma5 , maths
+T6 , Ma6 , maths
+T7 , Ma7 , maths
+T8 , Ma8 , maths
+T9 , Ma9 , maths
+T10 , Ma10 , maths
+T11 , En1 , english
+T12 , En2 , english
+T13 , En3 , english
+T14 , En4 , english
+T15 , En5 , english
+T16 , En6 , english
+T17 , En7 , english
+T18 , En8 , english
+T19 , En9 , english
+T20 , En10 , english
+T21 , Ph1 , physics
+T22 , Ph2 , physics
+T23 , Ph3 , physics
+T24 , Ph4 , physics
+T25 , Ph5 , physics
+T26 , Bi1 , biology
+T27 , Bi2 , biology
+T28 , Bi3 , biology
+T29 , Bi4 , biology
+T30 , Bi5 , biology
+T31 , Ch1 , chemistry
+T32 , Ch2 , chemistry
+T33 , Ch3 , chemistry
+T34 , Ch4 , chemistry
+T35 , Ch5 , chemistry
+T36 , Mu1 , music
+T37 , Mu2 , music
+T38 , Mu3 , music
+T39 , Mu4 , music
+T40 , Mu5 , music
+T41 , Ic1 , ICT
+T42 , Ic2 , ICT
+T43 , Ic3 , ICT
+T44 , Ic4 , ICT
+T45 , Ic5 , ICT
+T46 , Hi1 , history
+T47 , Hi2 , history
+T48 , Hi3 , history
+T49 , Hi4 , history
+T50 , Hi5 , history
+T51 , Ge1 , geography
+T52 , Ge2 , geography
+T53 , Ge3 , geography
+T54 , Ge4 , geography
+T55 , Ge5 , geography
+T56 , Ar1 , art
+T57 , Ar2 , art
+T58 , Ar3 , art
+T59 , Ar4 , art
+T60 , Ar5 , art
+T61 , Dt1 , DT
+T62 , Dt2 , DT
+T63 , Dt3 , DT
+T64 , Dt4 , DT
+T65 , Dt5 , DT
